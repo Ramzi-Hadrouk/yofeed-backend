@@ -1,0 +1,16 @@
+services:
+  hono_database:
+    image: postgres:17.5
+    container_name: yofeed-postgres-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: yofeed
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

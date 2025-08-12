@@ -1,15 +1,10 @@
 import { registerAs } from '@nestjs/config';
-import { validateEnv, EnvConfig } from './env.validation';
 
-export const appConfig = registerAs('app', () => {
-  const env = validateEnv(process.env);
-
-  return {
-    nodeEnv: env.NODE_ENV,
-    port: env.PORT,                    // ✅ number
-    jwtSecret: env.JWT_SECRET,
-    apiRateLimit: env.API_RATE_LIMIT,  // ✅ number
-    logLevel: env.LOG_LEVEL,
-    logFileEnabled: env.LOG_FILE_ENABLED, // ✅ boolean
-  };
-});
+export const appConfig = registerAs('app', () => ({
+  nodeEnv: process.env.NODE_ENV,
+  port: Number(process.env.PORT),
+  jwtSecret: process.env.JWT_SECRET,
+  apiRateLimit: Number(process.env.API_RATE_LIMIT),
+  logLevel: process.env.LOG_LEVEL,
+  logFileEnabled: process.env.LOG_FILE_ENABLED === 'true',
+}));

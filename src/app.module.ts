@@ -7,7 +7,6 @@ import 'winston-daily-rotate-file';
 
 import { validateEnv } from './config/env.validation';
 import { appConfig } from './config/app.config';
-import { databaseConfig } from './config/database.config';
 import { DrizzleModule } from './database/drizzle.module';
 const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
 
@@ -17,7 +16,7 @@ const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath,
-      load: [appConfig, databaseConfig],
+      load: [appConfig],
       validate: validateEnv,
       cache: true,
     }),

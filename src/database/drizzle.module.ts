@@ -1,12 +1,13 @@
+// drizzle.module.ts
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DrizzleService } from './drizzle.service';
-import { databaseConfig } from '../config/database.config';
-import { validateEnv } from '../config/env.validation';
-
+import { databaseConfig } from 'src/config/database.config'; // if using registerAs
 
 @Module({
-  imports: [ConfigModule.forFeature(databaseConfig)],
+  imports: [
+    ConfigModule.forFeature(databaseConfig) // Loads only database config
+  ],
   providers: [DrizzleService],
   exports: [DrizzleService],
 })

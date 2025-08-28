@@ -40,6 +40,9 @@ export const envSchema = z.object({
 
   // Security
   JWT_SECRET: z.string().min(8),
+  JWT_EXPIRES_IN:z.string().min(2),
+  JWT_REFRESH_SECRET: z.string().min(8),
+  JWT_REFRESH_EXPIRES_IN:z.string().min(2),
   API_RATE_LIMIT: z.preprocess(
     (val) => Number(val),
     z.number().int().positive().default(100)
@@ -68,6 +71,7 @@ export function validateEnv(config: unknown): EnvConfig {
     const errors = result.error.issues.map(
       (issue) => `${issue.path.join(".")}: ${issue.message}`
     );
+    
     throw new Error(`Environment validation failed:\n${errors.join("\n")}`);
   }
 

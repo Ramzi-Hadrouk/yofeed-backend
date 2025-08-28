@@ -8,6 +8,7 @@ import 'winston-daily-rotate-file';
 import { validateEnv } from './config/env.validation';
 import { appConfig } from './config/app.config';
 import { DrizzleModule } from './database/drizzle.module';
+import { UsersModule } from './users/users.module';
 const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
 
 @Module({
@@ -70,6 +71,8 @@ const envFilePath = `.env.${process.env.NODE_ENV || 'development'}`;
 
     // Database
     DrizzleModule,
+
+    UsersModule,
 
     // Your feature modules will go here
   ],
